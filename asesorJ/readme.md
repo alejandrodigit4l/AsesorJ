@@ -56,14 +56,14 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 ##-- Usuarios 
 Cada usuario se debe tener en cuenta en el momento de saber si es consultor o abogado, para ello la siguiente estructura id nombres email clave telefono celular push	#token push notification categoria tipo_usuario terminos img
 
-##-- Historial 
+##-- Historiales 
 Cada usuario debe tener un historial que sustente lo que se ha hecho, con el fin de tener estadisticas. id usuario sentencia #en resumen que realizo (publicar, responder, cambiar pregunta, calificar, cambiar perfil, login)
 
-##-- Chat 
+##-- Chats 
 Para la comunicacion entre los usuarios (abogado,consoltor) id receptor emisor mensaje tokenFirabase
 
-##-- tipo_usuario 
+##-- tipousuarios 
 tipos de usario administrador, abogado, consultor id nombre descripcion
 
-##-- categoria 
+##-- categorias 
 tipos de categoria solo creadas por un administrador id nombre descripcion usuario_admin
