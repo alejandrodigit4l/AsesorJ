@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Usuarios;
 use App\TipoUsuarios;
+use App\Categorias;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Mail\Message;
 
@@ -30,11 +31,13 @@ class UsuariosController extends Controller
     }
 
     public function getAbogados(){
-        $usuarios = Usuarios::where('tipoUsuario','3')->get();
+        $usuarios = Usuarios::where('tipo_usuario','3')->get();
         $list = array();
         foreach ($usuarios as $usuario) {
-            $tipoUsuario = TipoUsuario::where('id',$usuario['tipoUsuario'])->get();//traer datos del catalogo  
-            $usuario['tipoUsuario'] = $tipoUsuario;  
+            $tipoUsuario = TipoUsuarios::where('id',$usuario['tipo_usuario'])->get();//traer datos del catalogo  
+            $categoria = Categorias::where('id',$usuario['categoria'])->get();
+            $usuario['tipo_usuario'] = $tipoUsuario;  
+            $usuario['categoria'] = $categoria;
             array_push($list, $usuario);         
         }
         return response()->json([
@@ -45,11 +48,11 @@ class UsuariosController extends Controller
     }
 
     public function getUser(){
-        $usuarios = Usuarios::where('tipoUsuario','1')->get();
+        $usuarios = Usuarios::where('tipo_usuario','1')->get();
         $list = array();
         foreach ($usuarios as $usuario) {
-            $tipoUsuario = TipoUsuario::where('id',$usuario['tipoUsuario'])->get();//traer datos del catalogo  
-            $usuario['tipoUsuario'] = $tipoUsuario;  
+            $tipo_usuario = TipoUsuarios::where('id',$usuario['tipo_usuario'])->get();//traer datos del catalogo  
+            $usuario['tipo_usuario'] = $tipo_usuario;  
             array_push($list, $usuario);         
         }
         return response()->json([
@@ -93,44 +96,6 @@ class UsuariosController extends Controller
     	return redirect('/usuarios');
     }
 
-    public function storeApp(){
-        $estado = 'No pasa nada';
-        //dd(request()->all()); request son los datos que llegan del post
-        /*$categoria = new Categorias;
-        $categoria->nombre = request('nombre');
-        $categoria->descripcion = request('descripcion');
-        $categoria->save();*/
-
-        //verificar si el post es para eliminar, guardar o actializar
-        if(request('guardar')=='s'){
-            Usuarios::create(request(['nombres','email','clave','telefono','celular','push_token','categoria','tipo_usuario','terminos','img']));
-            $estado = '{sucess:true, message: create}';
-        }    
-        elseif(request('actualizar')=='s'){
-            $usuarios = Usuarios::find(request('id'));
-            $usuarios->nombres = request('nombres');
-            $usuarios->email = request('email');
-            $usuarios->clave = request('clave');
-            $usuarios->telefono = request('telefono');
-            $usuarios->celular = request('celular');
-            $usuarios->push_token = request('push_token');
-            $usuarios->categoria = request('categoria');
-            $usuarios->tipo_usuario = request('tipo_usuario');
-            $usuarios->terminos = request('terminos');
-            $usuarios->img = request('img');
-            $usuarios->save();
-            $estado = '{sucess:true, message: update}';
-        }   
-        elseif(request('eliminar')=='s'){
-            $usuarios = Usuarios::find(request('id'));
-            $usuarios->delete();
-            $estado = '{sucess:true, message: delete}';
-        }
-        //Categorias::create(request()->all());
-
-        return request()->all();
-    }
-
     public function pruebaEmail(){
         Mail::send('emails.welcome', ['name' => 'AsesorJuridico'], function(Message $message){
             $message->to('fredymoreno@uan.edu.co', 'alejandro moreno')
@@ -145,17 +110,48 @@ class UsuariosController extends Controller
 | APP route
 |--------------------------------------------------------------------------
 |
-| Usuarios estan en el controlador llamadas por Route::get()
+| Usuarios estan en el controlador llamadas por Route::..Appusuarios()
 |
 */
+
+    public function create(){
+        //creacion de usuario desde app
+        return Usuarios::create(request(['nombres','email','clave','telefono','celular','push_token','categoria','tipo_usuario','terminos','img']));
+        //Envio por correo
+        /*return Mail::send('emails.welcome', ['name' => 'AsesorJuridico'], function(Message $message){
+            $message->to(request('email'), request('nombres'))
+                    ->from('admin@asesorjuridico.com','Asesorjuridico')
+                    ->subject('Bienvenido a Asesor Juridico');
+        });*/
+    }
+
+    public function update(){
+        $usuarios = Usuarios::find(request('id'));
+        $usuarios->nombres = request('nombres');
+        $usuarios->email = request('email');
+        $usuarios->clave = request('clave');
+        $usuarios->telefono = request('telefono');
+        $usuarios->celular = request('celular');
+        $usuarios->push_token = request('push_token');
+        $usuarios->categoria = request('categoria');
+        $usuarios->tipo_usuario = request('tipo_usuario');
+        $usuarios->terminos = request('terminos');
+        $usuarios->img = request('img');
+        return $usuarios->save();  
+    }
+
+    public function delete(){
+        $usuarios = Usuarios::find(request('id'));
+        return $usuarios->delete();
+    }
 
     public function getToken(){
         return ['token'=>csrf_token()];
     }
 
     public function login(){
-        $list = Usuarios::where('email','=',request('email'))->where('password','=',request('password'))->get();
-        if(!empty($list)){
+        $list = Usuarios::where('email','=',request('email'))->where('clave','=',request('password'))->get();
+        if(!empty($list[0])){
             return response()->json([
                 'Status' => 'successful',
                 'Message' => 'Se encontraron coincidencias importantes',

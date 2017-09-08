@@ -64,9 +64,13 @@ Route::get('/usuarios/create', function(){
 //api controller
 Route::get('/usuarios/all', 'UsuariosController@all');
 Route::get('/usuarios/{usuario}', 'UsuariosController@une');
+Route::post('/Appusuarios', 'UsuariosController@create');
+Route::put('/Appusuarios', 'UsuariosController@update');
+Route::delete('/Appusuarios', 'UsuariosController@delete');
+Route::post('/Applogin','UsuariosController@login');
+Route::get('/getAbogados','UsuariosController@getAbogados');
 //post controller
 Route::post('/usuarios', 'UsuariosController@store');
-Route::post('/Appusuarios', 'UsuariosController@storeApp');
 Route::get('/usuarios/update/{id}', function($id){
 	$list = App\Usuarios::where('id',$id)->get();
 	return view('usuarios.update', compact('list'));
@@ -247,14 +251,8 @@ Route::get('/helplogin', function () {
 
 
 Route::post('/login','UsuariosController@login');
-Route::post('/registrar','UsuariosController@registrar');
 Route::get('/getToken','UsuariosController@getToken');
-Route::get('/getAbogados','UsuariosController@getAbogados');
-Route::get('/getUser','UsuariosController@getUser');
+
 Route::get('/emails/welcome','UsuariosController@pruebaEmail');
-
-
-Route::get('/getAllPreguntas','PreguntasController@getAllPreguntas');
-Route::get('/getPreguntasregular/{categoria}','PreguntasController@getPreguntasregular');
 
 
