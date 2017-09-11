@@ -127,30 +127,6 @@ Route::get('/chat/update/{id}', function($id){
 	$list = App\Chats::where('id',$id)->get();
 	return view('chat.update', compact('list'));
 });
-/*
-|--------------------------------------------------------------------------
-| Web contador preguntas
-|--------------------------------------------------------------------------
-|
-| Preguntas estan en el controlador llamadas por Route::get()
-|
-*/
-Route::get('/contadorPreguntas', function(){
-	$list = App\ContadorPreguntas::all();
-	return view('contadorPreguntas', compact('list'));
-});
-Route::get('/contadorPreguntas/create', function(){
-	return view('contadorPreguntas.create');
-});
-//api controller
-Route::get('/contadorPreguntas/all', 'ContadorPreguntasController@all');
-Route::get('/contadorPreguntas/{contadorPregunta}', 'ContadorPreguntasController@une');
-//post controller
-Route::post('/contadorPreguntas', 'ContadorPreguntasController@store');
-Route::get('/contadorPreguntas/update/{id}', function($id){
-	$list = App\ContadorPreguntas::where('id',$id)->get();
-	return view('contadorPreguntas.update', compact('list'));
-});
 
 /*
 |--------------------------------------------------------------------------
@@ -194,6 +170,9 @@ Route::get('/preguntas/create', function(){
 //api controller
 Route::get('/preguntas/all', 'PreguntasController@all');
 Route::get('/preguntas/{pregunta}', 'PreguntasController@une');
+Route::get('/preguntas/getAll', 'PreguntasController@getAll');
+Route::get('/preguntas/getPreguntasregular/{categoria}', 'PreguntasController@getPreguntasregular');
+Route::get('/preguntas/getPreguntasUsuario/{user}', 'PreguntasController@getPreguntasUsuario');
 //post controller
 Route::post('/preguntas', 'PreguntasController@store');
 Route::get('/preguntas/update/{id}', function($id){

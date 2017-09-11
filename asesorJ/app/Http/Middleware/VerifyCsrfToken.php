@@ -14,6 +14,8 @@ class VerifyCsrfToken extends BaseVerifier
     protected $except = [
         //
     	'/Appusuarios',
-    	'/Applogin'
+    	'/Applogin',
+        '/preguntas',
+        '/preguntas/*'
     ];
 }

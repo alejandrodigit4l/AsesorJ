@@ -21,8 +21,8 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>titulo</th>
-                                    <th>pregunta</th>
-                                    <th>idusuario</th>
+                                    <th>cuerpo</th>
+                                    <th>usuario</th>
                                     <th>categoria</th>
                                     <th>creado</th>
                                     <th>actualizado</th>
@@ -34,8 +34,8 @@
                             	<tr>
                                     <td>{{ $value['id'] }}</td>
                                     <td>{{ $value['titulo'] }}</td>
-                                    <td>{{ $value['pregunta'] }}</td>
-                                    <td>{{ $value['idUsuario'] }}</td>
+                                    <td>{{ $value['cuerpo'] }}</td>
+                                    <td>{{ $value['usuario'] }}</td>
                                     <td>{{ $value['categoria'] }}</td>
                                     <td>{{ $value['created_at'] }}</td>
                                     <td>{{ $value['updated_at'] }}</td>

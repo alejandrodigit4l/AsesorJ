@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Usuarios;
 use App\TipoUsuarios;
 use App\Categorias;
+use App\Historiales;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Mail\Message;
 
@@ -152,6 +153,12 @@ class UsuariosController extends Controller
     public function login(){
         $list = Usuarios::where('email','=',request('email'))->where('clave','=',request('password'))->get();
         if(!empty($list[0])){
+            //guardar el registro del login
+            $historiales = new Historiales;
+            $historiales->usuario = $list[0]->id;
+            $historiales->sentencia = 'Login';
+            $historiales->save();
+            //respuesta JSON
             return response()->json([
                 'Status' => 'successful',
                 'Message' => 'Se encontraron coincidencias importantes',

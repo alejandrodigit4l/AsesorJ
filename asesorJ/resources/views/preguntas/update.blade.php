@@ -124,20 +124,32 @@
   </div>
   <div class="col-md-9">
     <div class="form-group">
-      <label for="pregunta">pregunta: *</label>
-      <input type="text" class="form-control" value="{{ $list[0]['pregunta'] }}" id="pregunta" name="pregunta">
+      <label for="cuerpo">cuerpo: *</label>
+      <textarea class="form-control" id="cuerpo" name="cuerpo">{{ $list[0]['cuerpo'] }}</textarea>
     </div>
   </div>
   <div class="col-md-9">
     <div class="form-group">
-      <label for="idUsuario">idUsuario: *</label>
-      <input type="number" class="form-control" value="{{ $list[0]['idUsuario'] }}" id="idUsuario" name="idUsuario">
+      <label for="email">email: *</label>
+      <input type="text" class="form-control" id="email" value="{{ $list[0]['email'] }}" name="email">
+    </div>
+  </div>
+  <div class="col-md-9">
+    <div class="form-group">
+      <label for="push_token">push_token: *</label>
+      <input type="text" class="form-control" id="push_token" value="{{ $list[0]['push_token'] }}" name="push_token">
+    </div>
+  </div>
+  <div class="col-md-9">
+    <div class="form-group">
+      <label for="usuario">usuario: *</label>
+      <input type="number" class="form-control" id="usuario" value="{{ $list[0]['usuario'] }}" name="usuario">
     </div>
   </div>
   <div class="col-md-9">
     <div class="form-group">
       <label for="categoria">categoria: *</label>
-      <input type="text" class="form-control" value="{{ $list[0]['categoria'] }}" id="categoria" name="categoria">
+      <input type="text" class="form-control" id="categoria" value="{{ $list[0]['categoria'] }}" name="categoria">
     </div>
   </div>
   <div class="col-md-10">

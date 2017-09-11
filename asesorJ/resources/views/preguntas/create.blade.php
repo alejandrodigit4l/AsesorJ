@@ -12,14 +12,26 @@
   </div>
   <div class="col-md-9">
     <div class="form-group">
-      <label for="pregunta">pregunta: *</label>
-      <input type="text" class="form-control" id="pregunta" name="pregunta">
+      <label for="cuerpo">cuerpo: *</label>
+      <textarea class="form-control" id="cuerpo" name="cuerpo"></textarea>
     </div>
   </div>
   <div class="col-md-9">
     <div class="form-group">
-      <label for="idUsuario">idUsuario: *</label>
-      <input type="number" class="form-control" id="idUsuario" name="idUsuario">
+      <label for="email">email: *</label>
+      <input type="text" class="form-control" id="email" name="email">
+    </div>
+  </div>
+  <div class="col-md-9">
+    <div class="form-group">
+      <label for="push_token">push_token: *</label>
+      <input type="text" class="form-control" id="push_token" name="push_token">
+    </div>
+  </div>
+  <div class="col-md-9">
+    <div class="form-group">
+      <label for="usuario">usuario: *</label>
+      <input type="number" class="form-control" id="usuario" name="usuario">
     </div>
   </div>
   <div class="col-md-9">
